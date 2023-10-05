@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -42,6 +44,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $instagram = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Peinture::class, orphanRemoval: true)]
+    private Collection $peintures;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Blogpost::class, orphanRemoval: true)]
+    private Collection $blogposts;
+
+    public function __construct()
+    {
+        $this->peintures = new ArrayCollection();
+        $this->blogposts = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -169,6 +183,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setInstagram(?string $instagram): static
     {
         $this->instagram = $instagram;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Peinture>
+     */
+    public function getPeintures(): Collection
+    {
+        return $this->peintures;
+    }
+
+    public function addPeinture(Peinture $peinture): static
+    {
+        if (!$this->peintures->contains($peinture)) {
+            $this->peintures->add($peinture);
+            $peinture->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePeinture(Peinture $peinture): static
+    {
+        if ($this->peintures->removeElement($peinture)) {
+            // set the owning side to null (unless already changed)
+            if ($peinture->getUser() === $this) {
+                $peinture->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Blogpost>
+     */
+    public function getBlogposts(): Collection
+    {
+        return $this->blogposts;
+    }
+
+    public function addBlogpost(Blogpost $blogpost): static
+    {
+        if (!$this->blogposts->contains($blogpost)) {
+            $this->blogposts->add($blogpost);
+            $blogpost->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBlogpost(Blogpost $blogpost): static
+    {
+        if ($this->blogposts->removeElement($blogpost)) {
+            // set the owning side to null (unless already changed)
+            if ($blogpost->getUser() === $this) {
+                $blogpost->setUser(null);
+            }
+        }
 
         return $this;
     }
