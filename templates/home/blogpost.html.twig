@@ -1,58 +1,41 @@
 <div id="" class="">
 
-	<div class="container "> 
-  <h2 class="bg-info text-white text-bold text-uppercase text-italic text-center pt-3 mt-2"> Dernières réalisations </h2>
+	<div class="container ">
+		<h2 class="bg-info text-white text-bold text-uppercase text-italic text-center pt-3 mt-2">
+			Dernières réalisations
+		</h2>
 		<div class="card mb-3">
-		{% for realisation in realisations %}
-			
-		{% endfor %}
-			<div class="row g-0">
-				<div class="col-md-4">
-					<img src="https://iamage.fr/images/secure/ez4eGO/ccVfseB1pd50xKR_1676680591.jpg" class="img-fluid rounded-start" alt="...">
-				</div>
-				<div class="col-md-8">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-						<p class="card-text">
-							<small class="text-body-secondary">Last updated 3 mins ago</small>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-3" >
-			<div class="row g-0">
-				<div class="col-md-4">
-					<img src="https://iamage.fr/images/secure/ez4eGO/ccVfseB1pd50xKR_1676680591.jpg" class="img-fluid rounded-start" alt="...">
-				</div>
-				<div class="col-md-8">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-						<p class="card-text">
-							<small class="text-body-secondary">Last updated 3 mins ago</small>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="card mb-3" >
-			<div class="row g-0">
-				<div class="col-md-4">
-					<img src="https://iamage.fr/images/secure/ez4eGO/ccVfseB1pd50xKR_1676680591.jpg" class="img-fluid rounded-start" alt="...">
-				</div>
-				<div class="col-md-8">
-					<div class="card-body">
-						<h5 class="card-title">Card title</h5>
-						<p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-						<p class="card-text">
-							<small class="text-body-secondary">Last updated 3 mins ago</small>
-						</p>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+			{% for blogpost in blogposts %}
 
+				<div class="row g-0 border m-2">
+					<div class="col-md-4">
+						<img src="https://iamage.fr/images/secure/ez4eGO/ccVfseB1pd50xKR_1676680591.jpg" class="img-fluid rounded-start m-2" alt="..." style=" margin:auto; ">
+					</div>
+					<div class=" col-md-8">
+						<div class="card-body ">
+							<h5 class="card-title">
+								{{blogpost.titre}}
+							</h5>
+							<p class="card-text">
+								{{blogpost.contenu | u.truncate(200, '...', false ) }}
+							</p>
+							
+							<p class="card-text">
+								{{blogpost.contenu | u.truncate(200, '...', false ) }}
+							</p>
+							<p class="card-text">
+								{{blogpost.contenu | u.truncate(200, '...', false ) }}
+							</p>
+							<p class="card-text">
+								<small class="text-body-secondary">Date :  {{blogpost.createdAt | date('d/m/Y')}} </small>
+							</p>
+						</div>
+					</div>
+
+				</div>
+			{% endfor %}
+
+		</div>
+
+	</div>
 </div>
