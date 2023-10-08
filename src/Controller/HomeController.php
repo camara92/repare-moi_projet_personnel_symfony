@@ -16,6 +16,7 @@ class HomeController extends AbstractController
     {
         // les trois dernières peintures : 
 
+      
         return $this->render('home/index.html.twig', [
             'peintures' => $peintureRepository->lastTree(),
             'blogposts'=>$blogpostRepository->AffichersDerniersRealisations(),

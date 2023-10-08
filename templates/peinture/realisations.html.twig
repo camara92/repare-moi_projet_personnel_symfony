@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réalisation - repare-moi
+{% endblock %}
+
+{% block body %}
+
+
+	<div class="row row-cols-1 row-cols-md-3 g-4 mt-5 mb-2 container w-100 m-auto">
+		{% for peinture in peintures %}
+			<a href="">
+				<div class="col">
+					<div class="card h-100">
+						<img src=" {{asset( peinture.file) }}" class="card-img-top" alt="image de {{asset( peinture.nom) }}" style="height : 150px; ">
+						<div class="card-body">
+							<h5 class="card-title">
+								{{peinture.nom  }}
+							</h5>
+							<p class="card-text">
+								{{peinture.description | u.truncate(45, '...', false )}}
+							</p>
+						</div>
+						<div class="card-footer">
+							<small class="text-body-secondary">
+								{{peinture.createdAt | date('d/m/Y') }}
+							</small>
+						</div>
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{# pagination  #}
+	<div class="d-flex justify-content-center  m-2 ">
+		{% do peintures.setPageRange(2) %}
+		{{knp_pagination_render(peintures, 'base/pagination.html.twig')}}
+	</div>
+{% endblock %}
