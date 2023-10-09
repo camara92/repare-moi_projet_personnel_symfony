@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} A propos 
+{% endblock %}
+
+{% block body %}
+
+<div class="card mb-3 container w-100 mt-3 " style="max-width: 940px;">
+  <div class="row g-0">
+    <div class="col-md-4">
+      <img src="https://camara92.github.io/camara.daouda.devfullstack.portefolio/ressources/daouda2.jpeg" style="height: 540px; " class="img-fluid rounded-start" alt="...">
+    </div>
+    <div class="col-md-8">
+      <div class="card-body">
+        <h5 class="card-title"> {{peintre. nom }}  {{peintre. prenom }}  </h5>
+        <p class="card-text">{{peintre.apropos }} </p>
+        <p class="card-text">Téléphone : <small class="text-body-secondary">{{peintre.telephone }} </small></p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
