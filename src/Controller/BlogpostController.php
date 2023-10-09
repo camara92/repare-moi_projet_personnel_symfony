@@ -11,14 +11,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class BlogpostController extends AbstractController
 {
-    #[Route('/blogpost', name: 'app_blogpost')]
-    public function index(BlogpostRepository $blogpostRepository, PagintorInterface $paginator , Request $request): Response
+    #[Route('/actualites', name: 'app_actualites')]
+    public function Actualites(BlogpostRepository $blogpostRepository, PaginatorInterface $paginator , Request $request): Response
     {
         $data= $blogpostRepository->findAll(); 
         $blogposts = $paginator->paginate($data, $request->query->getInt('page', 1)
-    , 6
+    , 9
     );
-        return $this->render('blogpost/index.html.twig', [
+        return $this->render('blogpost/actualites.html.twig', [
             'controller_name' => 'BlogpostController',
             'blogposts' => $blogposts,
         ]);
