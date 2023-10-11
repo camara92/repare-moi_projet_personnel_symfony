@@ -12,9 +12,9 @@ class AproposController extends AbstractController
     #[Route('/apropos', name: 'app_apropos')]
     public function apropos(UserRepository $userRepository): Response
     {
-   
+
         return $this->render('apropos/apropos.html.twig', [
-            'peintre'=>$userRepository->getPeintre()
+            'peintre' => $userRepository->getPeintre()
         ]);
     }
 }

@@ -15,15 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 class PeintureController extends AbstractController
 {
     #[Route('/realisations', name: 'app_realisations')]
-    public function irealisations(PeintureRepository $peintureRepository
-    
-    , PaginatorInterface $paginator, Request $request ): Response
-    {
+    public function irealisations(
+        PeintureRepository $peintureRepository,
+        PaginatorInterface $paginator,
+        Request $request
+    ): Response {
 
-        $data= $peintureRepository->findAll(); 
-        $peintures = $paginator->paginate($data, $request->query->getInt('page', 1)
-    , 6
-    );
+        $data = $peintureRepository->findAll();
+        $peintures = $paginator->paginate(
+            $data,
+            $request->query->getInt('page', 1),
+            6
+        );
         return $this->render('peinture/realisations.html.twig', [
             'peintures' => $peintures,
         ]);
