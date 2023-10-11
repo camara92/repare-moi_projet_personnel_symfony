@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Réalisation - repare-moi
+{% endblock %}
+
+{% block body %}
+
+	<div class="row row-cols-1 row-cols-md-3 g-4 mt-5 mb-2 container w-100 m-auto text-center p-3">
+		<h3 class="text-center text-bold text-uppercase m-auto text-danger ">
+			Portefolio
+		</h3>
+	</div>
+	<div class="row row-cols-1 row-cols-md-3 g-4 mt-5 mb-2 container w-100 m-auto">
+		{% for categorie in categories %}
+			{% set img = categorie.peintures|last  %}
+
+			<div class="col">
+				<div class="card h-100">
+					<img src=" {{asset( img.file) }}" class="card-img-top" alt="" style="height : 150px; ">
+					<div class="card-body">
+						<h5 class="card-title">
+							{{categorie.nom  }}
+						</h5>
+						<p class="card-text">
+							{{categorie.description | u.truncate(45, '...', false )}}
+						</p>
+					</div>
+				
+				</div>
+			</div>
+
+		{% endfor %}
+	</div>
+
+{% endblock %}
